@@ -1,0 +1,9 @@
+# Node.js bağımlılıklarını dahil etme
+node_modules/
+
+# Çevresel değişken dosyasını gizle
+.env
+
+# Diğer önemsiz dosyalar
+*.log
+
