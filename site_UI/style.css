@@ -1,0 +1,155 @@
+/* PlaceHolder again. Will design better cause what the frick is this */
+
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e6f7ff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  /* Main Container */
+  .main-container {
+    display: flex;
+    width: 100%;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 250px;
+    background-color: #b3e0ff;
+    color: #003366;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 10px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  }
+  
+  /* dont mind here the logo aint here yet */
+  .logo {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+  
+  .levels-container {
+    width: 100%;
+    overflow-y: auto;
+    max-height: 60vh;
+    border-top: 1px solid #007acc;
+    padding-top: 10px;
+  }
+  
+  .levels-container h3 {
+    text-align: center;
+  }
+  
+  #levelList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #levelList li {
+    padding: 10px;
+    text-align: center;
+    background-color: #99d6ff;
+    margin: 5px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #levelList li:hover {
+    background-color: #66c2ff;
+  }
+  
+  /* Content */
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #ffffff;
+  }
+  
+  /* Terminal Section */
+  .terminal-section {
+    background-color: #f2f9ff;
+    color: #003366;
+    padding: 20px;
+    border-radius: 5px;
+    font-family: monospace;
+    margin-bottom: 30px;
+    border: 1px solid #99d6ff;
+  }
+  
+  /* AI Chat Section */
+  .ai-chat-section {
+    background-color: #f2f9ff;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #99d6ff;
+  }
+  
+  .chat-window {
+    background-color: #ffffff;
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #99d6ff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+  
+  .user-message, .ai-message {
+    max-width: 60%;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px;
+    display: inline-block;
+  }
+  
+  .user-message {
+    background-color: #007acc;
+    color: white;
+    text-align: right;
+    align-self: flex-end;
+  }
+  
+  .ai-message {
+    background-color: #e6f7ff;
+    color: #003366;
+    align-self: flex-start;
+  }
+  
+  .chat-input {
+    display: flex;
+  }
+  
+  input#aiInput {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #007acc;
+    border-radius: 4px;
+  }
+  
+  button#sendAiMessage {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  

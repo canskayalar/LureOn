@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<!-- Kind of a Placeholder -->
+<!-- Planning to add more dimension -->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lureon AI Challenge</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="main-container">
+
+  <!-- Sidebar (Levels & Mascot) -->
+  <aside class="sidebar">
+    <img src="assets/our_logo_here.png" alt="Mascot" class="logo">
+
+    <div class="levels-container">
+      <h3>Levels</h3>
+      <ul id="levelList">
+        <!-- Levels will be added here -->
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main Content (Terminal & AI Chat) -->
+  <div class="content">
+
+    <!-- Terminal Section -->
+    <section class="terminal-section">
+      <h1>Lureon AI & Command Challenge</h1>
+      <h2>Terminal</h2>
+      <input type="text" id="terminalInput" placeholder="Enter command... (e.g., ls, whoami)" />
+      <button id="runTerminalCommand">Run</button>
+      <pre class="output" id="terminalOutput"></pre>
+    </section>
+
+    <!-- AI Chat Section -->
+    <section class="ai-chat-section">
+      <h2>AI Chat</h2>
+      <div class="chat-window">
+        <div id="chatMessages" class="chat-messages">
+          <div class="ai-message">
+            <strong>ChatBot:</strong> 'chatbotnamehere' is hiding some secret, we need to find what it is hiding!
+          </div>
+        </div>
+        <div class="chat-input">
+          <input type="text" id="aiInput" placeholder="Ask the AI..." />
+          <button id="sendAiMessage">Send</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</div>
+
+<!--
+<script src="script will be added later i think"></script>
+-->
+</body>
+</html>
