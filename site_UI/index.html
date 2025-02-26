@@ -6,60 +6,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lureon AI Challenge</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  
+  <!-- External CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="main-container">
-
-  <!-- Sidebar (Levels & Mascot) -->
-  <aside class="sidebar">
-    <img src="assets/our_logo_here.png" alt="Mascot" class="logo">
-
-    <div class="levels-container">
-      <h3>Levels</h3>
-      <ul id="levelList">
-        <!-- Levels will be added here -->
-      </ul>
-    </div>
-  </aside>
-
-  <!-- Main Content (Terminal & AI Chat) -->
-  <div class="content">
-
-    <!-- Terminal Section -->
-    <section class="terminal-section">
-      <h1>Lureon AI & Command Challenge</h1>
-      <h2>Terminal</h2>
-      <input type="text" id="terminalInput" placeholder="Enter command... (e.g., ls, whoami)" />
-      <button id="runTerminalCommand">Run</button>
-      <pre class="output" id="terminalOutput"></pre>
-    </section>
-
-    <!-- AI Chat Section -->
-    <section class="ai-chat-section">
-      <h2>AI Chat</h2>
-      <div class="chat-window">
-        <div id="chatMessages" class="chat-messages">
-          <div class="ai-message">
-            <strong>ChatBot:</strong> 'chatbotnamehere' is hiding some secret, we need to find what it is hiding!
-          </div>
-        </div>
-        <div class="chat-input">
-          <input type="text" id="aiInput" placeholder="Ask the AI..." />
-          <button id="sendAiMessage">Send</button>
-        </div>
+  <!-- TOP NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="assets/logo.png" alt="Logo" class="logo-img"> Lureon AI
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Challenges</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Leaderboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+        </ul>
       </div>
-    </section>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTAINER -->
+  <div class="main-container">
+
+    <!-- LEFT SIDEBAR (LEVELS) -->
+    <aside class="sidebar">
+      <h3 class="sidebar-title">LEVELS</h3>
+      <ul class="level-list">
+        <li>LEVEL 1</li>
+        <li>LEVEL 2</li>
+        <li>LEVEL 3</li>
+      </ul>
+    </aside>
+
+    <!-- CONTENT AREA -->
+    <div class="content">
+
+      <!-- Chat & Terminal Tabs -->
+      <div class="toggle-buttons">
+        <button class="btn btn-primary active">Chat</button>
+        <button class="btn btn-secondary" id="terminalBtn" disabled>Terminal</button>
+      </div>
+
+      <!-- Chat Section -->
+      <section class="chat-section">
+        <p class="insert-text">Insert Text here 1</p>
+        <div class="chat-image">IMAGE HERE</div>
+
+        <div class="chat-input-container">
+          <input type="text" id="chatInput" class="chat-input" placeholder="Asking chat questions here">
+          <button class="btn btn-dark" id="sendChat">SEND</button>
+        </div>
+
+        <div class="chat-response">Chats answer</div>
+      </section>
+
+      <!-- Terminal Section (Initially Locked) -->
+      <section class="terminal-section" id="terminalSection">
+        <h2>Terminal</h2>
+        <input type="text" id="terminalInput" class="terminal-input" placeholder="Enter command...">
+        <button id="runCommand" class="btn btn-dark">Run</button>
+        <pre class="output" id="terminalOutput"></pre>
+      </section>
+
+    </div>
 
   </div>
 
-</div>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!--
-<script src="script will be added later i think"></script>
--->
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+
 </body>
 </html>
