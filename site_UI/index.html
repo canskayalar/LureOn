@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-
-<!-- Kind of a Placeholder -->
-<!-- Planning to add more dimension -->
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -22,14 +18,14 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-        <img src="assets/logo.png" alt="Logo" class="logo-img"> Lureon AI
+        <img src="assets/logo.png" alt="Logo" class="logo_image">
       </a>
       
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
   
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse" id="navbar_navigation">
         <ul class="navbar-nav me-auto">
           <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Challenges</a></li>
@@ -41,12 +37,12 @@
   </nav>
 
   <!-- MAIN CONTAINER -->
-  <div class="main-container">
+  <div class="main_wrapper">
 
     <!-- LEFT SIDEBAR (LEVELS) -->
-    <aside class="sidebar">
-      <h3 class="sidebar-title">LEVELS</h3>
-      <ul class="level-list">
+    <aside class="sidebar_section">
+      <h3 class="sidebar_header">LEVELS</h3>
+      <ul class="level_menu">
         <li>LEVEL 1</li>
         <li>LEVEL 2</li>
         <li>LEVEL 3</li>
@@ -54,33 +50,33 @@
     </aside>
 
     <!-- CONTENT AREA -->
-    <div class="content">
+    <div class="content_area">
 
       <!-- Chat & Terminal Tabs -->
-      <div class="toggle-buttons">
+      <div class="toggle_buttons">
         <button class="btn btn-primary active">Chat</button>
-        <button class="btn btn-secondary" id="terminalBtn" disabled>Terminal</button>
+        <button class="btn btn-secondary" id="terminal_button" disabled>Terminal</button>
       </div>
 
       <!-- Chat Section -->
-      <section class="chat-section">
-        <p class="insert-text">Insert Text here 1</p>
-        <div class="chat-image">IMAGE HERE</div>
+      <section class="chat_container">
+        <p class="chat_prompt">Insert Text here 1</p>
+        <div class="chat_visual">IMAGE HERE</div>
 
-        <div class="chat-input-container">
-          <input type="text" id="chatInput" class="chat-input" placeholder="Asking chat questions here">
-          <button class="btn btn-dark" id="sendChat">SEND</button>
+        <div class="chat_input_section">
+          <input type="text" id="chat_box" class="chat_field" placeholder="Asking chat questions here">
+          <button class="btn btn-dark" id="send_button">SEND</button>
         </div>
 
-        <div class="chat-response">Chats answer</div>
+        <div class="chat_output">Chats answer</div>
       </section>
 
       <!-- Terminal Section (Initially Locked) -->
-      <section class="terminal-section" id="terminalSection">
+      <section class="terminal_container" id="terminal_panel">
         <h2>Terminal</h2>
-        <input type="text" id="terminalInput" class="terminal-input" placeholder="Enter command...">
-        <button id="runCommand" class="btn btn-dark">Run</button>
-        <pre class="output" id="terminalOutput"></pre>
+        <input type="text" id="terminal_field" class="terminal_input" placeholder="Enter command...">
+        <button id="execute_button" class="btn btn-dark">Run</button>
+        <pre class="terminal_output" id="output_display"></pre>
       </section>
 
     </div>
