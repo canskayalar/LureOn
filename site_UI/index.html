@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Don't forget to add other items in style.css after adding stuff here -->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lureon AI Challenge</title>
 
-  <!-- Bootstrap, Planning on removing it & rewrite in CSS-->
+  <!-- Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   
-  <!-- External CSS, Will rename the style.css file again-->
+  <!-- External CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -29,16 +27,12 @@
   
       <div class="collapse navbar-collapse" id="navbar_navigation">
         <ul class="navbar-nav me-auto">
-          <!-- Will talk about sub-links here like adding log in page etc. & rm some -->
           <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Challenges</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Leaderboard</a></li>
           <li class="nav-item"><a class="nav-link" href="#">About</a></li>
         </ul>
       </div>
-
-      <!-- Will add Profile section right top corner on TopBar -->
-
     </div>
   </nav>
 
@@ -74,7 +68,7 @@
           <button class="btn btn-dark" id="send_button">SEND</button>
         </div>
 
-        <div class="chat_output">Chats answer</div>
+        <div class="chat_output" id="chat_response">Chats answer</div>
       </section>
 
       <!-- Terminal Section (Initially Locked) -->
@@ -92,9 +86,8 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Custom JS
+  <!-- Custom JS -->
   <script src="script.js"></script>
-  -->
 
 </body>
 </html>
