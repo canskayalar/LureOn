@@ -1,5 +1,7 @@
 # Node.js bağımlılıklarını dahil etme
 node_modules/
+package-lock.json
+
 
 # Çevresel değişken dosyasını gizle
 .env
