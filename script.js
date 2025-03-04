@@ -1,4 +1,4 @@
-console.log("script.js çalışıyor!"); // Konsolda kontrol için
+/*console.log("script.js çalışıyor!"); // Konsolda kontrol için
 
 const API_URL = "http://127.0.0.1:3001/api/ai"; // Backend API URL'si
 
@@ -36,4 +36,4 @@ document.getElementById("send_button").addEventListener("click", async () => {
     console.error("Backend bağlantı hatası:", error);
     document.querySelector(".chat_output").textContent = "Bağlantı hatası!";
   }
-});
+});*/
