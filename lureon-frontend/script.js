@@ -1,4 +1,17 @@
-
+function toggleMenu() {
+    document.getElementById("profileMenu").classList.toggle("active");
+  }
+  
+  // Menü dışında bir yere tıklanınca kapanmasını sağla
+  document.addEventListener("click", function(event) {
+    const profileMenu = document.getElementById("profileMenu");
+    const profileIcon = document.querySelector(".user_profile");
+  
+    if (!profileMenu.contains(event.target) && !profileIcon.contains(event.target)) {
+      profileMenu.classList.remove("active");
+    }
+  });
+  
 
 console.log("script.js çalışıyor!");
 
