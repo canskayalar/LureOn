@@ -21,4 +21,3 @@ services:
     build: ./lureon-mongoDB
     ports:
       - "27017:27017"
-

@@ -1,79 +1,154 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 
 function App() {
   const [activeTab, setActiveTab] = useState('chat');
   const [inputText, setInputText] = useState('');
-  const [chatResponse, setChatResponse] = useState('Waiting for response...');
+  const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isApiConnected, setIsApiConnected] = useState(false);
+  const chatEndRef = useRef(null);
+
+  // Update API URL to use the current hostname
+  const API_URL = `http://${window.location.hostname}:3001/api/ai`;
+
+  // Debug logging for API URL
+  console.log('Using API URL:', API_URL);
+
+  // Scroll to bottom of chat
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   // Test API connection on component mount
   useEffect(() => {
     const testApiConnection = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/ai');
+        console.log('Testing API connection...');
+        const response = await fetch(API_URL, {
+          headers: {
+            'Accept': 'application/json',
+            'Cache-Control': 'no-cache'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
         console.log('API Test Response:', data);
-        setIsApiConnected(true);
-        setChatResponse('API Connected. Ready to chat!');
+        
+        if (data.status === 'success') {
+          setIsApiConnected(true);
+          setError(null);
+          setMessages([{
+            type: 'ai',
+            content: 'API Connected. Ready to chat!',
+            timestamp: new Date().toISOString()
+          }]);
+        } else {
+          throw new Error('API returned unsuccessful status');
+        }
       } catch (error) {
         console.error('API Connection Error:', error);
         setError('Could not connect to API. Please check if backend is running.');
         setIsApiConnected(false);
+        setMessages([]);
       }
     };
 
     testApiConnection();
-  }, []);
+    
+    // Test connection every 5 seconds if not connected
+    const interval = setInterval(() => {
+      if (!isApiConnected) {
+        testApiConnection();
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isApiConnected, API_URL]);
 
   const handleSendMessage = async () => {
-    if (!inputText.trim()) return;
+    if (!inputText.trim()) {
+      console.log('Empty message, not sending');
+      return;
+    }
 
     try {
       setIsLoading(true);
       setError(null);
       
-      console.log('Sending message:', inputText); // Debug log
+      // Add user message immediately
+      const userMessage = {
+        type: 'user',
+        content: inputText,
+        timestamp: new Date().toISOString()
+      };
+      setMessages(prev => [...prev, userMessage]);
       
-      const response = await fetch('http://localhost:3001/api/ai', {
+      console.log('Sending message to API:', inputText);
+      
+      const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'Cache-Control': 'no-cache'
         },
-        body: JSON.stringify({ message: inputText }),
+        body: JSON.stringify({ message: inputText.trim() }),
       });
 
-      console.log('Response status:', response.status); // Debug log
+      console.log('API Response status:', response.status);
+      const responseText = await response.text();
+      console.log('Raw API response:', responseText);
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      let data;
+      try {
+        data = JSON.parse(responseText);
+        console.log('Parsed API response:', data);
+      } catch (e) {
+        console.error('Failed to parse API response:', e);
+        throw new Error('Invalid response format from server');
       }
 
-      const data = await response.json();
-      console.log('Response data:', data); // Debug log
-      
-      if (data.message) {
-        setChatResponse(data.message);
+      if (response.ok) {
+        // Add AI response to messages
+        const aiMessage = {
+          type: 'ai',
+          content: data.message,
+          timestamp: data.timestamp || new Date().toISOString(),
+          isFailover: data.isFailover
+        };
+        console.log('Adding AI response to chat:', aiMessage);
+        setMessages(prev => [...prev, aiMessage]);
+        setInputText('');
       } else {
-        console.warn('Unexpected response format:', data);
-        setChatResponse('Received response but no message found');
+        // Handle error response
+        const errorMessage = data.error || 'Unknown error occurred';
+        console.error('API error:', errorMessage);
+        setError(errorMessage);
+        
+        if (response.status === 402) {
+          setError('OpenAI API quota exceeded. Please check your billing details.');
+        }
       }
-      
-      setInputText('');
     } catch (error) {
-      console.error('Error details:', error);
-      setError(`Failed to send message: ${error.message}`);
-      setChatResponse('Error: Could not connect to server');
+      console.error('Chat error:', error);
+      setError(`Failed to get AI response: ${error.message}`);
+      if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+        setIsApiConnected(false);
+      }
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !isLoading) {
+    if (e.key === 'Enter' && !isLoading && inputText.trim()) {
+      console.log('Enter key pressed, sending message');
       handleSendMessage();
     }
   };
@@ -110,17 +185,35 @@ function App() {
 
         <div className="chat_section">
           <div className="chat_prompt">
-            {isApiConnected ? 'Connected to API' : 'Connecting to API...'}
+            {isApiConnected ? 'Connected to AI - Ready to chat!' : 'Connecting to AI...'}
           </div>
           
           <div className="image_container">
             IMAGE HERE
           </div>
 
+          <div className="chat_response">
+            {error ? (
+              <div className="error-message">{error}</div>
+            ) : (
+              <div className="messages-container">
+                {messages.map((msg, index) => (
+                  <div key={index} className={`message ${msg.type}`}>
+                    <div className="message-content">{msg.content}</div>
+                    <div className="message-timestamp">
+                      {new Date(msg.timestamp).toLocaleTimeString()}
+                    </div>
+                  </div>
+                ))}
+                <div ref={chatEndRef} />
+              </div>
+            )}
+          </div>
+
           <div className="input_section">
             <input 
               type="text" 
-              placeholder={isApiConnected ? "Type your message here..." : "Waiting for API connection..."}
+              placeholder={isApiConnected ? "Type your message here..." : "Waiting for AI connection..."}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyPress={handleKeyPress}
@@ -128,21 +221,11 @@ function App() {
             />
             <button 
               onClick={handleSendMessage}
-              disabled={isLoading || !isApiConnected}
+              disabled={isLoading || !isApiConnected || !inputText.trim()}
               className={isLoading ? 'loading' : ''}
             >
               {isLoading ? 'SENDING...' : 'SEND'}
             </button>
-          </div>
-
-          <div className="chat_response">
-            {error ? (
-              <div className="error-message">{error}</div>
-            ) : (
-              <div className="response-content">
-                {chatResponse}
-              </div>
-            )}
           </div>
         </div>
       </div>
