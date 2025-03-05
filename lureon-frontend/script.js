@@ -1,6 +1,3 @@
-console.log("✅ script.js çalışıyor!");
-
-// API Adresi (Lakera Guard API'yi destekleyen backend URL'si)
 function toggleMenu() {
     document.getElementById("profileMenu").classList.toggle("active");
   }
